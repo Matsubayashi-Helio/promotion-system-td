@@ -1,4 +1,8 @@
 <h1>Promotion System</h1>
 <h3>Boas vindas ao sistema de gestão de promoções</h3>
 
-<%= link_to 'Promoções', promotions_path%>
+<%= I18n.translate('hello') %>
+<%= I18n.t('hello') %>
+<%= t('hello') %>
+
+<%= link_to t('promotions_link'), promotions_path%>
