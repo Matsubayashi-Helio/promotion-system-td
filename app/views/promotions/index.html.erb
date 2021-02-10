@@ -1,3 +1,9 @@
+<%= form_with url: search_promotions_path, method: :get do %>
+        <%= label_tag :q, 'Busca' %>
+        <%= text_field_tag :q %>
+        <%= submit_tag 'Pesquisar' %>
+<% end %>
+
 <% if @promotions.empty? %>
     <h1>Nenhuma promoção cadastrada</h1>
 <% else %>

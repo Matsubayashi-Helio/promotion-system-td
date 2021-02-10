@@ -1,0 +1,13 @@
+pt-BR:
+  active: 'Ativo'
+  inactive: 'Inativo'
+  promotions_link: "Promoções"
+  categories_link: "Categorias"
+  promotions:
+    show:
+      active: 'Ativo'
+      inactive: 'Inativo'
+  home:
+    search:
+      active: 'Ativo'
+      inactive: 'Inativo'

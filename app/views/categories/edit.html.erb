@@ -1,0 +1,25 @@
+<% if @category.errors.any? %>
+    <div class="alert">
+        <p>Não foi possível editar a categoria</p>
+        <p>Confira os erros abaixo:</p>
+        <ul>
+            <% @category.errors.full_messages.each do |m|%>
+                <li><%= m %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<%= form_with model: @category do |f| %>
+    <%= f.label :name, placeholder: @category.name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :code %>
+    <%= f.text_field :code, placeholder: @category.code%>
+
+    <%= f.submit 'Editar Categoria' %>
+
+<% end %>
+<h2><%= link_to 'Voltar', category_path(id: @category.id)%></h2>
+
+

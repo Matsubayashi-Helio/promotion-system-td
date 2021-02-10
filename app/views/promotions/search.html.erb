@@ -1,0 +1,7 @@
+<h1>Resultados da busca</h1>
+<ul>
+    <% @promotions.each do |promotion| %>
+        <li><%= promotion.name %></li>
+        <li> <%= promotion.code %></li>
+    <% end %>
+</ul>

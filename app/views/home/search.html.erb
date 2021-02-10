@@ -1,0 +1,12 @@
+<h1>Resultados da busca</h1>
+<% if @coupons.any? %>
+<ul>
+    <% @coupons.each do |coupon| %>
+        <li><%= coupon.code %></li>
+        <li> <%= coupon.promotion.name %></li>
+        <li>Status: <%= coupon.status.capitalize %></li>
+    <% end %>
+</ul>
+<% else %>
+    <p>Cupom não existe!</p>
+<% end %>

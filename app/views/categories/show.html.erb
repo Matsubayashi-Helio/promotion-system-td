@@ -1,0 +1,11 @@
+<dl>  
+        <dt>Nome:</dt>
+        <dd><%= @category.name %></dd>
+        <dt>Código:</dt>
+        <dd><%= @category.code %></dd>
+        <hr>
+        
+</dl>
+
+<h2><%= link_to 'Voltar', categories_path%></h2>
+<h2><%= link_to 'Editar Categoria', edit_category_path%></h2>

@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_150234) do
+ActiveRecord::Schema.define(version: 2021_02_08_233501) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string "code"
+    t.integer "promotion_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
+    t.index ["code"], name: "index_coupons_on_code", unique: true
+    t.index ["promotion_id"], name: "index_coupons_on_promotion_id"
+  end
+
+  create_table "promotion_approvals", force: :cascade do |t|
+    t.integer "promotion_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["promotion_id"], name: "index_promotion_approvals_on_promotion_id"
+    t.index ["user_id"], name: "index_promotion_approvals_on_user_id"
+  end
 
   create_table "promotions", force: :cascade do |t|
     t.string "name"
@@ -21,6 +47,24 @@ ActiveRecord::Schema.define(version: 2021_01_26_150234) do
     t.date "expiration_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_promotions_on_user_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "coupons", "promotions"
+  add_foreign_key "promotion_approvals", "promotions"
+  add_foreign_key "promotion_approvals", "users"
+  add_foreign_key "promotions", "users"
 end

@@ -1,20 +1,48 @@
-<dl>  
-        <dt>Nome:</dt>
-        <dd><%= @promotion.name %></dd>
-        <dt>Descrição:</dt>
-        <dd><%= @promotion.description %></dd>
-        <dt>Desconto:</dt>
-        <dd><%= number_to_percentage(@promotion.discount_rate, precision:2, separator: ',') %></dd>
-        <dt>Código:</dt>
-        <dd><%= @promotion.code %></dd>
-        <dt>Expiração:</dt>
-        <dd>
-            <%= I18n.localize(@promotion.expiration_date) %>
-        </dd>
-        <dt>Quantidade:</dt>
-        <dd><%= @promotion.coupon_quantity %></dd>
-        <hr>
-        
-</dl>
+<%= flash[:notice] %>
 
 <h2><%= link_to 'Voltar', promotions_path%></h2>
+
+<span>Cadastrada por: <%= @promotion.user.email %></span>
+
+<dl>  
+    <dt>Nome:</dt>
+    <dd><%= @promotion.name %></dd>
+    <dt>Descrição:</dt>
+    <dd><%= @promotion.description %></dd>
+    <dt>Desconto:</dt>
+    <dd><%= number_to_percentage(@promotion.discount_rate, precision:2, separator: ',') %></dd>
+    <dt>Código:</dt>
+    <dd><%= @promotion.code %></dd>
+    <dt>Expiração:</dt>
+    <dd><%= I18n.localize(@promotion.expiration_date) %></dd>
+    <dt>Quantidade:</dt>
+    <dd><%= @promotion.coupon_quantity %></dd>
+    <hr>
+    
+</dl>
+
+<% unless current_user == @promotion.user %>
+    <%= link_to 'Aprovar Promoção', approve_promotion_path, method: :post %>
+<% end %>
+
+<% if @promotion.approved? %>
+    <dt>Status:</dt> <dd>Aprovada</dd>
+<% end%>
+
+
+<%= link_to 'Editar Promoção', edit_promotion_path(@promotion) %>
+
+<%= link_to 'Deletar Promoção', promotion_path(@promotion), method: :delete %>
+
+<% if @promotion.coupons.size ==0 %>
+    <%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post %>
+<% end %>
+
+<% @promotion.coupons.each do |coupon|%>
+    <div id="coupon-<%= coupon.id %>">
+        <span><%= coupon.code %> (<%=t(".#{coupon.status}")%>)</span>
+        <% if coupon.active? %>
+            <%= link_to 'Inativar', inactivate_coupon_path(coupon), method: :post %>
+        <% end %>
+    </div>
+<% end %>

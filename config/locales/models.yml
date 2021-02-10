@@ -4,6 +4,15 @@ pt-BR:
       promotion:
         one: Promoção
         other: Promoções
+      category:
+        one: Caregoria
+        other: Categorias
+      user:
+        one: Usuário
+        other: Usuários
+      coupon:
+        one: Cupom
+        other: Coupons
     attributes:
       promotion:
         name: "Nome"
@@ -12,3 +21,14 @@ pt-BR:
         coupon_quantity: "Quantidade de cupons"
         expiration_date: "Data de término"
         description: "Descrição"
+      category:
+        name: "Nome"
+        code: "Código"
+      user:
+        emal: E-mail
+        password: Senha
+      coupon:
+        code: Código
+        status:
+          active: Ativo
+          inactive: Inativo
